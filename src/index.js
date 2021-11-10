@@ -21,7 +21,7 @@ for(let i=0; i<list.length; i++){
         "kioskName": list[i].kioskName,
         "chequeType": list[i].chequeType,
         "pays": list[i].pays,
-        "sum": list[i].sum/100,
+        "sum": list[i].sum,
         "positions": list[i].positions,
       }
 
@@ -34,7 +34,7 @@ function Tempsum(props) {
     for (let i = 0; i < tempsum.length; i++) {
       x = x + tempsum[i].sum;
     }
-    x = x/100;
+    x=x/100;
     return(
       x
     );
@@ -111,8 +111,8 @@ addString = (value) => {
       "num": value.numId,
      "kioskName": value.kioskName,
      "chequeType": value.typePay,
-      "pays": [{sum: parseInt(value.payDone), payType: parseInt(value.payStatus)}],
-      "sum": parseInt(value.paySum),
+      "pays": [{sum: parseInt(value.payDone)*100, payType: parseInt(value.payStatus)}],
+      "sum": parseInt(value.paySum)*100,
       "positions": [{name: value.namesList, quantity: parseInt(value.quantity),}],
     }
   );
@@ -129,8 +129,8 @@ render(){
         <td>{this.state.list[i].kioskName}</td>
         <td>{this.state.list[i].chequeType === 0 ? 'Продажа' : 'Возврат'}</td>
         <td><Payornot pays={this.state.list[i].pays} sum={this.state.list[i].sum} /></td>
-        <td><Tempsum pays={this.state.list[i].pays} /> р.</td>
-        <td>{this.state.list[i].sum} р.</td>
+        <td><Tempsum pays={this.state.list[i].pays} /></td>
+        <td>{this.state.list[i].sum / 100}</td>
         <td><Quantity position={this.state.list[i].positions} /></td>
         <td><Tovari names={this.state.list[i].positions} /></td>
         <td>
